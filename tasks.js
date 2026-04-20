@@ -6,11 +6,7 @@ const protect = require('../middleware/auth');
 router.get('/:eventId', protect, async (req, res) => {
     try {
         const { rows } = await db.query(
-            `SELECT m.*, u.username as sender_name
-             FROM messages m
-             JOIN users u ON u.id = m.sender_id
-             WHERE m.event_id = $1
-             ORDER BY m.timestamp ASC`,
+            'SELECT * FROM tasks WHERE event_id = $1',
             [req.params.eventId]
         );
         res.json(rows);
@@ -20,13 +16,23 @@ router.get('/:eventId', protect, async (req, res) => {
 });
 
 router.post('/', protect, async (req, res) => {
-    const { event_id, content } = req.body;
+    const { event_id, task_name, priority } = req.body;
     try {
         const { rows } = await db.query(
-            'INSERT INTO messages (sender_id, event_id, content) VALUES ($1, $2, $3) RETURNING *',
-            [req.user.id, event_id, content]
+            'INSERT INTO tasks (event_id, assigned_to, task_name, priority) VALUES ($1, $2, $3, $4) RETURNING *',
+            [event_id, req.user.id, task_name, priority]
         );
         res.json(rows[0]);
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+router.patch('/:id', protect, async (req, res) => {
+    const { status } = req.body;
+    try {
+        await db.query('UPDATE tasks SET status = $1 WHERE id = $2', [status, req.params.id]);
+        res.json({ success: true });
     } catch (err) {
         res.status(500).json({ error: 'Server error' });
     }
