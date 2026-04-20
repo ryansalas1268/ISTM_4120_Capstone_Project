@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkUp! - My Events</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+       <div class="logo">
+           <a href="events.html"><img src="LinkUp.png" alt="logo"></a>
+       </div>
+       <div class="nav-links">
+           <a href="events.html">My Events</a>
+           <a href="calendar.html">My Calendar</a>
+           <a href="#">Friends</a>
+           <a href="messages.html">Messages</a>
+           <button class="premium-btn">⭐ Upgrade Premium</button>
+       </div>
+       </nav>
+    <main class="dashboard">
+        <div class="left-column">
+            
+            <section class="card event-header">
+                <h1>Beach trip May 20th 🔥</h1>
+                <p class="subtitle">Hosted by Professor Dasgupta • 📍 Virginia Beach, VA</p>
+                
+                <div class="rsvp-container">
+                    <h3>Your RSVP:</h3>
+                    <div class="btn-group">
+                        <button class="btn btn-going" onclick="setRSVP('Going')"> Going ✅</button>
+                        <button class="btn btn-maybe" onclick="setRSVP('Maybe')"> Maybe🤔 </button>
+                        <button class="btn btn-no" onclick="setRSVP('No')">No ❌</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card time-voting">
+                <h2>Vote on a Time 🕒</h2>
+                <p class="subtitle">Select the time that works best for you!</p>
+                
+                <div id="pollContainer">
+                    <div class="poll-option">
+                        <button class="btn-vote" onclick="vote('Friday 7:00 PM', 'vote1')">+1</button>
+                        <span>Friday 7:00 PM</span>
+                        <span id="vote1" class="vote-count">3 votes</span>
+                    </div>
+                    <div class="poll-option">
+                        <button class="btn-vote" onclick="vote('Saturday 6:00 PM', 'vote2')">+1</button>
+                        <span>Saturday 6:00 PM</span>
+                        <span id="vote2" class="vote-count">1 vote</span>
+                    </div>
+                </div>
+
+                <div class="propose-time-controls">
+                    <input type="text" id="newTimeInput" placeholder="E.g., Sunday 2:00 PM">
+                    <button class="btn-propose" onclick="proposeTime()">Propose</button>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="right-column">
+            
+            <section class="card tasks">
+                <h2>Group To-Do List 📋</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-bar" id="taskProgress"></div>
+                </div>
+                <p class="subtitle" id="progressText">0% Completed</p>
+
+                <div class="task-controls">
+                    <input type="text" id="taskInput" placeholder="What needs to be done?">
+                    <select id="taskPriority">
+                        <option value="High">🔴 High</option>
+                        <option value="Med">🟡 Med</option>
+                        <option value="Low">🟢 Low</option>
+                    </select>
+                    <button class="btn-add" onclick="addTask()">Add</button>
+                </div>
+
+                <ul id="taskList" class="task-list">
+                </ul>
+            </section>
+
+            <section class="card friends">
+                <h2>Guestlist 👥</h2>
+                <ul class="friend-list" id="guestList">
+                    <li><span class="status going"></span> <a href="#" class="handle">@Lauren123</a> "Lauren" (Going)</li>
+                    <li><span class="status maybe"></span> <a href="#" class="handle">@Nabil321</a> "Nabil" (Maybe)</li>
+                    <li><span class="status going"></span> <a href="#" class="handle">@BornWinner</a> "Lydia" (Going)</li>
+                    <li><span class="status no"></span> <a href="#" class="handle">@Ryan67</a> "Ryan" (Can't go)</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <div id="toast" class="toast hidden">Notification message here!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

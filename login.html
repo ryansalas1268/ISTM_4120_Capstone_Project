@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkUp! - Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="events.html"><img src="LinkUp.png" alt="logo"></a>
+        </div>
+        <div class="nav-links">
+            <a href="events.html">My Events</a>
+            <a href="calendar.html">My Calendar</a>
+            <a href="#">Friends</a>
+            <a href="messages.html">Messages</a>
+            <a href="login.html">Login</a>
+            <button class="premium-btn">⭐ Upgrade Premium</button>
+        </div>
+    </nav>
+
+
+    <main class="login-page">
+        <div class="login-card">
+            <h2>Login</h2>
+            <p class="subtitle">Welcome back to LinkUp</p>
+
+
+            <form onsubmit="handleLogin(event)">
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+
+
+            <p class="login-footer">
+                Don't have an account?
+                <span onclick="showSignup()">Sign up</span>
+            </p>
+        </div>
+    </main>
+
+
+    <div id="toast" class="toast hidden"></div>
+
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+
+            if (email === "" || password === "") {
+                showToast("Please fill in all fields");
+                return;
+            }
+
+
+            showToast(`Welcome, ${email}!`);
+
+
+            setTimeout(() => {
+                window.location.href = "events.html";
+            }, 1500);
+        }
+
+
+        function showSignup() {
+            showToast("Signup page coming soon");
+        }
+
+
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.classList.remove("hidden");
+
+
+            setTimeout(() => {
+                toast.classList.add("hidden");
+            }, 3000);
+        }
+    </script>
+
+
+</body>
+</html>

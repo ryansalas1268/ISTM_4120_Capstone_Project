@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>LinkUp! - Messages</title>
+   <link rel="stylesheet" href="styles.css">
+   <link rel="stylesheet" href="messages.css">
+</head>
+<body>
+   <nav class="navbar">
+       <div class="logo">
+           <a href="events.html"><img src="LinkUp.png" alt="logo"></a>
+       </div>
+       <div class="nav-links">
+           <a href="events.html">My Events</a>
+           <a href="calendar.html">My Calendar</a>
+           <a href="#">Friends</a>
+           <a href="messages.html">Messages</a>
+           <button class="premium-btn">⭐ Upgrade Premium</button>
+       </div>
+   </nav>
+
+
+   <main class="messages-page">
+       <!-- Left sidebar -->
+       <aside class="messages-sidebar card">
+           <h2>Messages</h2>
+           <p class="subtitle">Your event chats and direct messages</p>
+
+
+           <div class="conversation-list">
+               <div class="conversation-item active" onclick="selectChat('Beach trip 🔥', this)">
+                   <div>
+                       <h3>Beach trip 🔥</h3>
+                       <p>Shuba: Are we locking Friday 7 PM?</p>
+                   </div>
+                   <span class="conversation-time">2m</span>
+               </div>
+
+
+               <div class="conversation-item" onclick="selectChat('Movie Night 🎬', this)">
+                   <div>
+                       <h3>Movie Night 🎬</h3>
+                       <p>Lauren: popcorn is covered</p>
+                   </div>
+                   <span class="conversation-time">1h</span>
+               </div>
+
+
+               <div class="conversation-item" onclick="selectChat('Shuba', this)">
+                   <div>
+                       <h3>Shuba</h3>
+                       <p>Can you vote on the final time?</p>
+                   </div>
+                   <span class="conversation-time">3h</span>
+               </div>
+           </div>
+       </aside>
+
+
+       <!-- Main chat -->
+       <section class="chat-panel card">
+           <div class="chat-header">
+               <div>
+                   <h2 id="chatTitle">Beach trip 🔥</h2>
+                   <p class="subtitle" id="chatSubtitle">5 members • Linked to your event</p>
+               </div>
+               <div class="chat-header-actions">
+                   <a href="events.html" class="chat-link-btn">View Event</a>
+               </div>
+           </div>
+
+
+           <div class="chat-messages" id="chatMessages">
+               <div class="message-row">
+                   <div class="message-bubble">
+                       Hey everyone, Friday 7 PM is winning the vote right now. Are we locking that in?
+                   </div>
+                   <div class="message-meta">Shuba • 10:12 AM</div>
+               </div>
+
+
+               <div class="message-row">
+                   <div class="message-bubble">
+                       Works for me. I’m already marked as going.
+                   </div>
+                   <div class="message-meta">Lauren • 10:14 AM</div>
+               </div>
+
+
+               <div class="message-row my-message">
+                   <div class="message-bubble">
+                       I’m good for Friday too. I can bring snacks.
+                   </div>
+                   <div class="message-meta">You • 10:16 AM</div>
+               </div>
+           </div>
+
+
+           <div class="chat-input-area">
+               <input type="text" id="messageInput" placeholder="Type a message...">
+               <button class="btn-send" onclick="sendMessage()">Send</button>
+           </div>
+       </section>
+
+
+       <!-- Right sidebar -->
+       <aside class="chat-details card">
+           <h2>Event Details</h2>
+           <p class="subtitle">Connected to Beach trip 🔥</p>
+
+
+           <div class="detail-block">
+               <h3>Guestlist 👥</h3>
+               <ul class="friend-list">
+                   <li><span class="status going"></span> <a href="#" class="handle">@Lauren123</a></li>
+                   <li><span class="status maybe"></span> <a href="#" class="handle">@Nabil321</a></li>
+                   <li><span class="status going"></span> <a href="#" class="handle">@BornWinner</a></li>
+                   <li><span class="status no"></span> <a href="#" class="handle">@Ryan67</a></li>
+               </ul>
+           </div>
+
+
+           <div class="detail-block">
+               <h3>Shared Tasks 📋</h3>
+               <ul class="linked-task-list">
+                   <li><input type="checkbox"> Bring snacks</li>
+                   <li><input type="checkbox"> Bring speaker</li>
+                   <li><input type="checkbox"> Send boardwalk location</li>
+               </ul>
+           </div>
+       </aside>
+   </main>
+
+
+   <script src="messages.js"></script>
+</body>
+</html>

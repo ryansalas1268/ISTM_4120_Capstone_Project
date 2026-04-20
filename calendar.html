@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkUp! - My Calendar & Tasks</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="navbar">
+       <div class="logo">
+           <a href="events.html"><img src="LinkUp.png" alt="logo"></a>
+       </div>
+       <div class="nav-links">
+           <a href="events.html">My Events</a>
+           <a href="calendar.html">My Calendar</a>
+           <a href="#">Friends</a>
+           <a href="messages.html">Messages</a>
+           <button class="premium-btn">⭐ Upgrade Premium</button>
+       </div>
+</nav>
+
+    <main class="dashboard calendar-dashboard">
+        <div class="left-column">
+            <section class="card">
+                
+                <div class="calendar-header">
+                    <button class="btn-nav" onclick="changeMonth(-1)">&lt;</button>
+                    <h2 id="monthYearHeader">April 2026
+                    </h2>
+                    <button class="btn-nav" onclick="changeMonth(1)">&gt;</button>
+                </div>
+                
+                <div class="calendar-weekdays">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+                    <div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                
+                <div class="calendar-grid" id="calendarGrid">
+                </div>
+            </section>
+        </div>
+
+        <div class="right-column">
+            
+            <section class="card">
+                <h2>Upcoming Events 📅</h2>
+                <ul class="timeline">
+                    <li class="timeline-item">
+                        <div class="timeline-date">May 20 • 7:00 PM</div>
+                        <div class="timeline-content">
+                            <strong>Beach trip 🔥</strong>
+                            <p class="subtitle" style="margin-bottom: 0;">📍 Virginia Beach, VA</p>
+                        </div>
+                    </li>
+                    <li class="timeline-item">
+                        <div class="timeline-date">May 25 • 8:00 PM</div>
+                        <div class="timeline-content">
+                            <strong>Movie Night 🍿</strong>
+                            <p class="subtitle" style="margin-bottom: 0;">📍 Professor Dasgupta's House</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="card">
+                <h2>My Tasks 📋</h2>
+                <p class="subtitle">Assigned to you across all events</p>
+                <ul class="task-list" id="myTasks">
+                    <li>
+                        <input type="checkbox" onchange="toggleTask(this)"> 
+                        <span class="task-text">Bring Bluetooth Speaker (Beach trip)</span>
+                    </li>
+                    <li>
+                        <input type="checkbox" onchange="toggleTask(this)"> 
+                        <span class="task-text">Buy popcorn (Movie Night)</span>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth(); 
+        let currentYear = currentDate.getFullYear();
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        function renderCalendar(month, year) {
+            const calendarGrid = document.getElementById('calendarGrid');
+            const monthYearHeader = document.getElementById('monthYearHeader');
+            
+            calendarGrid.innerHTML = ''; 
+            monthYearHeader.innerText = `${monthNames[month]} ${year}`;
+
+            const firstDayOfMonth = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            for (let i = 0; i < firstDayOfMonth; i++) {
+                let emptyBox = document.createElement('div');
+                emptyBox.className = 'calendar-day empty';
+                calendarGrid.appendChild(emptyBox);
+            }
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                let dayBox = document.createElement('div');
+                dayBox.className = 'calendar-day';
+                dayBox.innerText = i; 
+
+                let today = new Date();
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dayBox.classList.add('today'); 
+                }
+                
+                if ((i === 20 || i === 25) && month === 2 && year === 2026) {
+                    dayBox.classList.add('has-event');
+                }
+
+                dayBox.addEventListener('click', function() {
+                    alert(`Selected: ${monthNames[month]} ${i}, ${year}`);
+                });
+
+                calendarGrid.appendChild(dayBox);
+            }
+        }
+
+        function changeMonth(direction) {
+            currentMonth += direction;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            } else if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar(currentMonth, currentYear);
+        }
+
+        function toggleTask(checkboxElement) {
+            const taskText = checkboxElement.nextElementSibling;
+            if (checkboxElement.checked) {
+                taskText.classList.add('task-completed');
+            } else {
+                taskText.classList.remove('task-completed');
+            }
+        }
+
+        window.onload = function() {
+            renderCalendar(currentMonth, currentYear);
+        };
+    </script>
+</body>
+</html>
